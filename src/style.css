@@ -20,6 +20,8 @@ svg { flex-shrink: 0; }
 .shell { max-width: 1180px; margin-inline: auto; padding: clamp(30px, 6vw, 68px) clamp(16px, 4vw, 48px) 48px; }
 .page-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 25px; }
 h1 { margin: 0; font-size: clamp(29px, 4.4vw, 52px); font-weight: 680; line-height: 1.08; letter-spacing: -.055em; }
+.page-title { display: flex; align-items: center; gap: .15em; }
+.page-title-icon { width: .74em; height: .74em; flex: none; }
 h2 { margin: 0; font-size: 17px; font-weight: 680; letter-spacing: -.025em; }
 .button {
   display: inline-flex;

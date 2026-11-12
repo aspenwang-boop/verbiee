@@ -26,7 +26,10 @@ function App() {
 
   return <main className="shell">
     <header className="page-header">
-      <h1>{quiz ? 'TEST' : 'VERBIEE'}</h1>
+      <h1 className="page-title">
+        {quiz ? 'TEST' : 'VERBIEE'}
+        {!quiz && <img className="page-title-icon" src="./verbiee-icon.png" alt="" width={192} height={192} />}
+      </h1>
       <a className="button secondary page-link" href={quiz ? '#explore' : '#quiz'}>
         {quiz && <ArrowLeft size={15} />}
         {quiz ? 'VERBIEE' : 'TEST'}
