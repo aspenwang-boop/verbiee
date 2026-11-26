@@ -170,7 +170,7 @@ h2 { margin: 0; font-size: 17px; font-weight: 680; letter-spacing: -.025em; }
 }
 
 .page-navigation { display: flex; flex-wrap: wrap; gap: 7px; }
-.focus-page { --past: #86609a; --present: #42786f; --future: #567aab; margin-top: clamp(180px, 25svh, 235px); }
+.focus-page { --past: #94704E; --present: #42786f; --future: #567aab; margin-top: clamp(180px, 25svh, 235px); }
 .focus-eras { display: grid; grid-template-columns: 3fr 1fr 3fr; text-align: center; margin-bottom: 18px; font-size: 10px; letter-spacing: 2px; }
 .focus-eras span:first-child { color: var(--past); }
 .focus-eras span:nth-child(2) { color: var(--present); }
