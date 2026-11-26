@@ -192,8 +192,8 @@ h2 { margin: 0; font-size: 17px; font-weight: 680; letter-spacing: -.025em; }
 .focus-zh { margin: 3px 0 12px; color: var(--muted); font-size: 11px; }
 .focus-page h4 { margin: 0 0 7px; color: var(--muted); font-size: 9px; font-weight: 600; letter-spacing: 1.4px; }
 .focus-formula { margin: 0; white-space: pre-line; color: var(--tense-color); line-height: 1.8; }
-.focus-irregulars { width: fit-content; max-width: 100%; margin: 0 auto; }
-.focus-exceptions > h4 { text-align: center; }
+.focus-irregular-block { width: fit-content; max-width: 100%; margin: 0 auto; }
+.focus-irregulars { margin: 0; }
 .focus-irregulars > div { display: grid; grid-template-columns: minmax(75px, auto) minmax(0, 1fr); column-gap: 16px; padding: 3px 0; font-size: 11px; line-height: 1.6; }
 .focus-irregulars dt { color: var(--muted); }
 .focus-irregulars dd { margin: 0; overflow-wrap: anywhere; }

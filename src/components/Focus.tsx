@@ -4,12 +4,12 @@ import { focusTenses } from '../data/focus'
 type Tense = typeof focusTenses[number]
 
 function Exceptions({ tense }: { tense: Tense }) {
-  if (!('etrePairs' in tense)) return <>
+  if (!('etrePairs' in tense)) return <div className="focus-irregular-block">
     <h4>IRREGULAR VERBS</h4>
     <dl className="focus-irregulars" lang="fr">
       {tense.irregulars.map(([verb, form]) => <div key={verb}><dt>{verb}</dt><dd>{form}</dd></div>)}
     </dl>
-  </>
+  </div>
 
   return <>
     <h4>ÊTRE VERB PAIRS</h4>
