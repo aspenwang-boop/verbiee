@@ -22,7 +22,7 @@ svg { flex-shrink: 0; }
 h1 { margin: 0; font-size: clamp(29px, 4.4vw, 52px); font-weight: 680; line-height: 1.08; letter-spacing: -.055em; }
 .page-title { display: flex; align-items: center; gap: .32em; min-height: 1.08em; }
 .page-star-link { display: grid; place-items: center; min-width: 44px; min-height: 44px; border-radius: 8px; color: #22232a; flex: none; }
-.page-star-link.is-focus { color: #c486ce; }
+.page-star-link.is-focus { color: #800020; }
 .page-title-icon {
   display: block;
   width: .74em;
