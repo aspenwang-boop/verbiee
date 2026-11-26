@@ -34,13 +34,18 @@ function Exceptions({ tense }: { tense: Tense }) {
 export function Focus() {
   const [active, setActive] = useState<string | null>(null)
   const container = useRef<HTMLElement>(null)
+  const hoverPreview = useRef<string | null>(null)
 
   useEffect(() => {
     function outside(event: PointerEvent) {
-      if (!container.current?.contains(event.target as Node)) setActive(null)
+      if (!container.current?.contains(event.target as Node)) {
+        hoverPreview.current = null
+        setActive(null)
+      }
     }
     function escape(event: KeyboardEvent) {
       if (event.key === 'Escape') {
+        hoverPreview.current = null
         setActive(null)
       }
     }
@@ -60,7 +65,17 @@ export function Focus() {
         return <li className="focus-node" data-tone={tense.tone} key={tense.id}>
           <button type="button" className="focus-trigger" aria-expanded={selected}
             aria-controls={`focus-${tense.id}`}
-            onClick={() => setActive(previous => previous === tense.id ? null : tense.id)}>
+            onPointerEnter={event => {
+              if (event.pointerType === 'mouse' && window.matchMedia('(hover: hover)').matches && !selected) {
+                hoverPreview.current = tense.id
+                setActive(tense.id)
+              }
+            }}
+            onClick={() => {
+              const previewing = hoverPreview.current === tense.id
+              hoverPreview.current = null
+              setActive(previous => previewing ? tense.id : previous === tense.id ? null : tense.id)
+            }}>
             <span className="focus-dot" aria-hidden="true" />
             <span lang="fr">{tense.title}</span>
           </button>
