@@ -185,7 +185,7 @@ h2 { margin: 0; font-size: 17px; font-weight: 680; letter-spacing: -.025em; }
 .focus-dot::after { content: ""; position: absolute; width: 5px; height: 5px; inset: 5px; border-radius: 50%; background: currentColor; }
 .focus-trigger[aria-expanded="true"] .focus-dot { box-shadow: 0 0 0 5px var(--tone-tint); background: var(--tone-tint); }
 .focus-panels[hidden] { display: none; }
-.focus-formation, .focus-exceptions { position: absolute; z-index: 5; color: #303a36; width: min(338px, calc(100vw - 32px)); left: 50%; transform: translateX(-50%); font-size: 12px; }
+.focus-formation, .focus-exceptions { position: absolute; z-index: 5; color: #303a36; width: min(338px, calc(100vw - 32px)); left: var(--focus-center, 50%); transform: translateX(-50%); font-size: 12px; }
 .focus-formation { bottom: calc(100% + 14px); max-height: 190px; overflow: auto; padding: 16px 20px; border: 1px solid #dedee5; border-radius: 14px; background: var(--surface); box-shadow: 0 10px 30px #21203314; }
 .focus-exceptions { top: calc(100% + 14px); padding: 0 15px 20px; max-height: max(170px, calc(65svh - 210px)); overflow: auto; scrollbar-width: thin; overscroll-behavior: contain; }
 .focus-formation h3 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -.4px; }
@@ -203,9 +203,6 @@ h2 { margin: 0; font-size: 17px; font-weight: 680; letter-spacing: -.025em; }
 .focus-participles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px 8px; font-size: 11px; line-height: 1.45; }
 .focus-agreement { margin: 8px 0 9px; color: var(--muted); font-size: 11px; line-height: 1.45; }
 .focus-agreement span:last-child { display: inline-block; }
-.focus-node:first-child :is(.focus-formation, .focus-exceptions),
-.focus-node:nth-child(2) :is(.focus-formation, .focus-exceptions) { left: 0; transform: none; }
-.focus-node:nth-last-child(-n+2) :is(.focus-formation, .focus-exceptions) { left: auto; right: 0; transform: none; }
 
 /* Portrait phones and tablets use a vertical timeline. Landscape uses the horizontal layout. */
 @media (orientation: portrait) and (max-width: 1100px) {

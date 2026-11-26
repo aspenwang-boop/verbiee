@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { focusTenses } from '../data/focus'
 
 type Tense = typeof focusTenses[number]
@@ -35,6 +35,31 @@ export function Focus() {
   const [active, setActive] = useState<string | null>(null)
   const container = useRef<HTMLElement>(null)
   const hoverPreview = useRef<string | null>(null)
+
+  useLayoutEffect(() => {
+    const panels = container.current?.querySelector<HTMLElement>('.focus-panels:not([hidden])')
+    const node = panels?.parentElement
+    if (!panels || !node) return
+
+    function alignPanels() {
+      const sections = [...panels!.querySelectorAll<HTMLElement>('.focus-formation, .focus-exceptions')]
+      if (getComputedStyle(sections[0]).position === 'static') return
+      const bounds = node!.getBoundingClientRect()
+      const halfWidth = Math.max(...sections.map(section => section.offsetWidth)) / 2
+      const viewportWidth = document.documentElement.clientWidth
+      const center = Math.max(16 + halfWidth, Math.min(bounds.left + bounds.width / 2, viewportWidth - 16 - halfWidth))
+      node!.style.setProperty('--focus-center', `${center - bounds.left}px`)
+    }
+
+    alignPanels()
+    const observer = new ResizeObserver(alignPanels)
+    observer.observe(container.current!)
+    window.addEventListener('resize', alignPanels)
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', alignPanels)
+    }
+  }, [active])
 
   useEffect(() => {
     function outside(event: PointerEvent) {
