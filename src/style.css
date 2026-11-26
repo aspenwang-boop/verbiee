@@ -160,3 +160,70 @@ h2 { margin: 0; font-size: 17px; font-weight: 680; letter-spacing: -.025em; }
 @media (prefers-reduced-motion: reduce) {
   .button { transition: none; }
 }
+
+.page-navigation { display: flex; flex-wrap: wrap; gap: 7px; }
+.focus-page { --past: #8c735c; --present: #3e6255; --future: #627a91; margin-top: clamp(180px, 25svh, 235px); }
+.focus-eras { display: grid; grid-template-columns: 3fr 1fr 3fr; text-align: center; margin-bottom: 18px; font-size: 10px; letter-spacing: 2px; }
+.focus-eras span:first-child { color: var(--past); }
+.focus-eras span:nth-child(2) { color: var(--present); }
+.focus-eras span:last-child { color: var(--future); }
+.focus-timeline { position: relative; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
+.focus-timeline::before { content: ""; position: absolute; inset: 18px 0 auto; height: 1px; background: #ccd4cd; }
+.focus-node { position: relative; min-width: 0; color: var(--past); }
+.focus-node[data-tone="present"] { color: var(--present); }
+.focus-node[data-tone="future"] { color: var(--future); }
+.focus-trigger { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; min-height: 68px; padding: 10px 2px 6px; border-radius: 8px; background: transparent; font-size: 12px; font-weight: 550; }
+.focus-dot { position: relative; display: block; flex: none; width: 17px; height: 17px; border: 1px solid currentColor; border-radius: 50%; background: #f5f5f7; }
+.focus-dot::after { content: ""; position: absolute; width: 5px; height: 5px; inset: 5px; border-radius: 50%; background: currentColor; }
+.focus-trigger[aria-expanded="true"] .focus-dot { box-shadow: 0 0 0 5px #e8e8ef; }
+.focus-panels[hidden] { display: none; }
+.focus-formation, .focus-exceptions { position: absolute; z-index: 5; color: #303a36; width: min(338px, calc(100vw - 32px)); left: 50%; transform: translateX(-50%); font-size: 12px; }
+.focus-formation { bottom: calc(100% + 14px); max-height: 190px; overflow: auto; padding: 16px 20px; border: 1px solid #dedee5; border-radius: 14px; background: var(--surface); box-shadow: 0 10px 30px #21203314; }
+.focus-exceptions { top: calc(100% + 14px); padding: 0 15px 20px; max-height: max(170px, calc(65svh - 210px)); overflow: auto; scrollbar-width: thin; overscroll-behavior: contain; }
+.focus-formation h3 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -.4px; }
+.focus-zh { margin: 3px 0 12px; color: var(--muted); font-size: 11px; }
+.focus-page h4 { margin: 0 0 7px; color: var(--muted); font-size: 9px; font-weight: 600; letter-spacing: 1.4px; }
+.focus-formula { margin: 0; white-space: pre-line; color: var(--present); line-height: 1.8; }
+.focus-irregulars { margin: 0; }
+.focus-irregulars > div { display: grid; grid-template-columns: minmax(75px, auto) minmax(0, 1fr); column-gap: 16px; padding: 3px 0; font-size: 11px; line-height: 1.6; }
+.focus-irregulars dt { color: var(--muted); }
+.focus-irregulars dd { margin: 0; overflow-wrap: anywhere; }
+.focus-compound .focus-exceptions { width: min(510px, calc(100vw - 32px)); }
+.focus-pairs, .focus-participles { margin: 0 0 9px; padding: 0; list-style: none; }
+.focus-pairs li { display: grid; grid-template-columns: minmax(0, 1fr) 2em minmax(0, 1fr); text-align: center; padding: 2px 0; border-bottom: 1px solid var(--line); font-size: 12px; line-height: 1.25; }
+.focus-pairs small, .focus-participles span { color: var(--muted); font-size: 11px; }
+.focus-participles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px 8px; font-size: 11px; line-height: 1.45; }
+.focus-agreement { margin: 8px 0 9px; color: var(--muted); font-size: 11px; line-height: 1.45; }
+.focus-agreement span:last-child { display: inline-block; }
+.focus-node:first-child :is(.focus-formation, .focus-exceptions),
+.focus-node:nth-child(2) :is(.focus-formation, .focus-exceptions) { left: 0; transform: none; }
+.focus-node:nth-last-child(-n+2) :is(.focus-formation, .focus-exceptions) { left: auto; right: 0; transform: none; }
+
+/* Portrait phones and tablets use a vertical timeline. Landscape uses the horizontal layout. */
+@media (orientation: portrait) and (max-width: 1100px) {
+  .focus-page { margin-top: 25px; }
+  .focus-eras { display: none; }
+  .focus-timeline { display: block; }
+  .focus-timeline::before { inset: 18px auto 18px 12px; width: 1px; height: auto; }
+  .focus-node { padding-bottom: 9px; }
+  .focus-node::before { display: block; margin: 8px 0 10px 35px; font-size: 10px; letter-spacing: 2px; }
+  .focus-node:first-child::before { content: "PASSÉ"; }
+  .focus-node:nth-child(4)::before { content: "PRÉSENT"; }
+  .focus-node:nth-child(5)::before { content: "FUTUR"; }
+  .focus-trigger { flex-direction: row; justify-content: flex-start; gap: 15px; min-height: 44px; padding: 10px 4px; font-size: 14px; }
+  .focus-panels { position: relative; margin: 4px 0 15px 35px; }
+  .focus-panels::before { display: none; }
+  .focus-node :is(.focus-formation, .focus-exceptions) {
+    position: static; width: auto; max-height: none; transform: none; overflow: visible;
+  }
+  .focus-formation { padding: 14px; }
+  .focus-exceptions { padding: 17px 0 0; }
+  .focus-participles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (orientation: landscape) and (max-width: 900px) {
+  .focus-page { margin-top: 170px; }
+  .focus-trigger { font-size: 10px; }
+  .focus-formation { max-height: 150px; padding: 10px 14px; }
+  .focus-zh { margin-bottom: 5px; }
+  .focus-exceptions { max-height: 240px; }
+}
