@@ -34,16 +34,6 @@ function Exceptions({ tense }: { tense: Tense }) {
 export function Focus() {
   const [active, setActive] = useState<string | null>(null)
   const container = useRef<HTMLElement>(null)
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
-
-  function keepOpen() {
-    clearTimeout(closeTimer.current)
-  }
-
-  function closeSoon() {
-    keepOpen()
-    closeTimer.current = setTimeout(() => setActive(null), 180)
-  }
 
   useEffect(() => {
     function outside(event: PointerEvent) {
@@ -51,23 +41,18 @@ export function Focus() {
     }
     function escape(event: KeyboardEvent) {
       if (event.key === 'Escape') {
-        clearTimeout(closeTimer.current)
         setActive(null)
       }
     }
     document.addEventListener('pointerdown', outside)
     document.addEventListener('keydown', escape)
     return () => {
-      clearTimeout(closeTimer.current)
       document.removeEventListener('pointerdown', outside)
       document.removeEventListener('keydown', escape)
     }
   }, [])
 
-  return <section className="focus-page" ref={container} aria-label="French tense timeline"
-    onPointerLeave={event => { if (event.pointerType === 'mouse') closeSoon() }} onPointerEnter={keepOpen}
-    onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) closeSoon() }}
-    onFocus={keepOpen}>
+  return <section className="focus-page" ref={container} aria-label="French tense timeline">
     <div className="focus-eras" aria-hidden="true"><span>PASSÉ</span><span>PRÉSENT</span><span>FUTUR</span></div>
     <ol className="focus-timeline">
       {focusTenses.map(tense => {
@@ -75,20 +60,12 @@ export function Focus() {
         return <li className="focus-node" data-tone={tense.tone} key={tense.id}>
           <button type="button" className="focus-trigger" aria-expanded={selected}
             aria-controls={`focus-${tense.id}`}
-            onPointerEnter={event => {
-              if (event.pointerType === 'mouse' && window.matchMedia('(hover: hover)').matches) {
-                keepOpen()
-                setActive(tense.id)
-              }
-            }}
-            onFocus={() => { keepOpen(); setActive(tense.id) }}
-            onClick={() => { keepOpen(); setActive(tense.id) }}>
+            onClick={() => setActive(previous => previous === tense.id ? null : tense.id)}>
             <span className="focus-dot" aria-hidden="true" />
             <span lang="fr">{tense.title}</span>
           </button>
           <div className={`focus-panels ${'etrePairs' in tense ? 'focus-compound' : ''}`}
-            id={`focus-${tense.id}`} hidden={!selected}
-            onPointerEnter={keepOpen}>
+            id={`focus-${tense.id}`} hidden={!selected}>
             <div className="focus-formation" role="region" aria-label={`${tense.title} formation`} tabIndex={0}>
               <h3 lang="fr">{tense.title}</h3><p className="focus-zh" lang="zh-Hant">{tense.zh}</p>
               <h4>FORMATION</h4><p className="focus-formula">{tense.formula}</p>

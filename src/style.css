@@ -170,20 +170,20 @@ h2 { margin: 0; font-size: 17px; font-weight: 680; letter-spacing: -.025em; }
 }
 
 .page-navigation { display: flex; flex-wrap: wrap; gap: 7px; }
-.focus-page { --past: #8c735c; --present: #3e6255; --future: #627a91; margin-top: clamp(180px, 25svh, 235px); }
+.focus-page { --past: #86609a; --present: #42786f; --future: #567aab; margin-top: clamp(180px, 25svh, 235px); }
 .focus-eras { display: grid; grid-template-columns: 3fr 1fr 3fr; text-align: center; margin-bottom: 18px; font-size: 10px; letter-spacing: 2px; }
 .focus-eras span:first-child { color: var(--past); }
 .focus-eras span:nth-child(2) { color: var(--present); }
 .focus-eras span:last-child { color: var(--future); }
 .focus-timeline { position: relative; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
 .focus-timeline::before { content: ""; position: absolute; inset: 18px 0 auto; height: 1px; background: #ccd4cd; }
-.focus-node { position: relative; min-width: 0; color: var(--past); }
-.focus-node[data-tone="present"] { color: var(--present); }
-.focus-node[data-tone="future"] { color: var(--future); }
+.focus-node { --tone-tint: #eee6f3; position: relative; min-width: 0; color: var(--past); }
+.focus-node[data-tone="present"] { --tone-tint: #e1eeea; color: var(--present); }
+.focus-node[data-tone="future"] { --tone-tint: #e3ebf6; color: var(--future); }
 .focus-trigger { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; min-height: 68px; padding: 10px 2px 6px; border-radius: 8px; background: transparent; font-size: 12px; font-weight: 550; }
 .focus-dot { position: relative; display: block; flex: none; width: 17px; height: 17px; border: 1px solid currentColor; border-radius: 50%; background: #f5f5f7; }
 .focus-dot::after { content: ""; position: absolute; width: 5px; height: 5px; inset: 5px; border-radius: 50%; background: currentColor; }
-.focus-trigger[aria-expanded="true"] .focus-dot { box-shadow: 0 0 0 5px #e8e8ef; }
+.focus-trigger[aria-expanded="true"] .focus-dot { box-shadow: 0 0 0 5px var(--tone-tint); background: var(--tone-tint); }
 .focus-panels[hidden] { display: none; }
 .focus-formation, .focus-exceptions { position: absolute; z-index: 5; color: #303a36; width: min(338px, calc(100vw - 32px)); left: 50%; transform: translateX(-50%); font-size: 12px; }
 .focus-formation { bottom: calc(100% + 14px); max-height: 190px; overflow: auto; padding: 16px 20px; border: 1px solid #dedee5; border-radius: 14px; background: var(--surface); box-shadow: 0 10px 30px #21203314; }
