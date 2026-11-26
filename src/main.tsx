@@ -32,13 +32,17 @@ function App() {
 
   return <main className="shell">
     <header className="page-header">
-      <h1 className="page-title">
-        {quiz ? 'TEST' : focus ? 'FOCUS' : 'VERBIEE'}
-        {page === 'explore' && <img className="page-title-icon" src="./verbiee-icon.png" alt="" width={192} height={192} />}
+      <h1 className="page-title" aria-label={focus ? 'FOCUS' : undefined}>
+        {!focus && (quiz ? 'TEST' : 'VERBIEE')}
+        {!quiz && <a className={`page-star-link ${focus ? 'is-focus' : ''}`}
+          href={focus ? '#explore' : '#focus'}
+          aria-label={focus ? '返回 VERBIEE 首頁' : '開啟 FOCUS'}
+          title={focus ? 'VERBIEE' : 'FOCUS'}>
+          <span className="page-title-icon" aria-hidden="true" />
+        </a>}
       </h1>
       <nav className="page-navigation" aria-label="Pages">
-        {page !== 'explore' && <a className="button secondary page-link" href="#explore"><ArrowLeft size={15} />VERBIEE</a>}
-        {!focus && <a className="button secondary page-link" href="#focus">FOCUS<ArrowUpRight size={15} /></a>}
+        {quiz && <a className="button secondary page-link" href="#explore"><ArrowLeft size={15} />VERBIEE</a>}
         {!quiz && <a className="button secondary page-link" href="#quiz">TEST<ArrowUpRight size={15} /></a>}
       </nav>
     </header>
